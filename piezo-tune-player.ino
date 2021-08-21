@@ -7,6 +7,10 @@
  * @author Tony Pham
  */
 
+ // TODO: Move the tune to a separate file (C++ class for tunes?)
+ // TODO: Create a separate function for playing tunes? void playTune(int*, int*) or void playTune(Tune)?
+ // TODO: Fix some timing issues (in particular the chorus)
+
 /* Note sounds frequencies */
 #define REST 0
 #define NOTE_CS3 139
@@ -167,4 +171,5 @@ void loop() {
  * 1. 'Aozora no Rhapsody' played with Synthesia uploaded by 'MyReminiscence': https://www.youtube.com/watch?v=sG9tKEV510s
  * 2. 'Project 12 - Piezo Sounder Melody Player' from the 'Beginning Arduino' textbook written by Michael Roberts
  * 3. Physics of Music - Notes: https://pages.mtu.edu/~suits/notefreqs.html
+ * 4. Music video to the original song: https://www.youtube.com/watch?v=maKok2RItxM
  */
