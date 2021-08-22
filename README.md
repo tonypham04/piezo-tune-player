@@ -1,6 +1,6 @@
 # Piezo Tune Player
 Below you will find a video demonstration of the Piezo Tune Player featuring a cover of the song 青空のラプソディ by fhána!
-<a href="https://www.youtube.com/watch?v=uyH_Z2kmj3U" title="Piezo Tune Player Video Demo">
+<a href="https://www.youtube.com/watch?v=uyH_Z2kmj3U" title="Piezo Tune Player Video Demo" target="_blank">
 <img src="images/青空のラプソディ-by-fhána-(Piezo Buzzer-Cover)-Thumbnail.png" alt="Thumbnail image for YouTube video cover of fhána's 青空のラプソディ played using a piezo buzzer"/>
 </a>
 ## Overview
