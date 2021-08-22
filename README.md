@@ -1,6 +1,8 @@
 # Piezo Tune Player
 Below you will find a video demonstration of the Piezo Tune Player featuring a cover of the song 青空のラプソディ by fhána!
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uyH_Z2kmj3U" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="https://www.youtube.com/watch?v=uyH_Z2kmj3U" title="Piezo Tune Player Video Demo">
+<img src="images/青空のラプソディ-by-fhána-(Piezo Buzzer-Cover)-Thumbnail.png" alt="Thumbnail image for YouTube video cover of fhána's 青空のラプソディ played using a piezo buzzer"/>
+</a>
 ## Overview
 This project creates a tune player by writing a sketch using Arduino programming language which plays a tune and outputs the sound to a piezo buzzer.
 ### Materials
