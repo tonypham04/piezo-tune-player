@@ -6,29 +6,41 @@
  *
  * @author Tony Pham
  */
-
- // TODO: Move the tune to a separate file (C++ class for tunes?)
- // TODO: Create a separate function for playing tunes? void playTune(int*, int*) or void playTune(Tune)?
- // TODO: Fix some timing issues (in particular the chorus)
+ // TODO: Add tune selection feature to be able to play a selected tune by index (updates to: sketch, possibly PiezoTunePlayerLibrary)
+ // TODO: Add a new tune (Sasageyo, Kaikai Kitan, no. 1)?
+ // TODO: Add support for a 7-segment (updates to: Fritzing, README, circuit, sketch)
+ // TODO: Fix some timing issues (in particular the chorus for Miss Kobayashi Op 1)
 
 #include "Playlist.h"
 
 /* Global Variables */
 const int PIEZO_PIN = 15;
-int tuneLength;
 
 void setup() {
   pinMode(PIEZO_PIN, OUTPUT);
-  tuneLength = sizeof(missKobayashiOpTune) / sizeof(missKobayashiOpTune[0]);
 }
 
 void loop() {
-  for (int i = 0; i < tuneLength; i++) {
-    tone(PIEZO_PIN, missKobayashiOpTune[i]);
-    delay(1000 * missKobayashiOpDurations[i]);
-    noTone(PIEZO_PIN);
-  }
+  int missKobayashiOpTuneLength = sizeof(missKobayashiOpTune) / sizeof(missKobayashiOpTune[0]);
+  playTune(PIEZO_PIN, missKobayashiOpTune, missKobayashiOpDurations, missKobayashiOpTuneLength);
   delay(500);
+}
+
+/**
+ * This function plays a tune using the piezo buzzer.
+ * @param piezoPin - Pin corresponding to the piezo buzzer.
+ * @param tuneNotes[] - Array containing the notes of the tune.
+ * @param tuneDurations[] - Array containing the duration each note should be played.
+ * @param numNotes - The number of notes (needs to be provided as when passed into a function an array is treated as a pointer to the start of the array)
+ */
+void playTune(const int piezoPin, const int tuneNotes[], const float tuneDurations[], const int numNotes)
+{
+  for (int i = 0; i < numNotes; i++)
+  {
+    tone(piezoPin, tuneNotes[i]);
+    delay(1000 * tuneDurations[i]);
+    noTone(piezoPin);
+  }
 }
 
 /**
