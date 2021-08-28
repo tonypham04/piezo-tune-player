@@ -24,6 +24,10 @@ For viewing inside [Fritzing](https://fritzing.org/), refer to the 'fritzing' di
 To simply see a .PNG of the circuit, refer to the 'images' directory.
 The latest circuit design as of Saturday, August 21, 2021 used is shown below:  
 ![Latest Circuit Design](images/piezo-tune-player-circuit.png)
+## Running the Project
+To run the project in Arduino IDE what you will need to do first is move the directory *PiezoTunePlayerLibrary* into the *libraries* directory for Arduino IDE as shown below:
+![Screenshot of where to put the PiezoTunePlayerLibrary](images/Where-to-put-PiezoTunePlayerLibrary.png)  
+This is important because the PiezoTunePlayerLibrary contains all the content related to tunes used in the sketch.
 ## Playlist
 The playlist of tunes available as of Saturday, August 21, 2021 is shown below:
 - 青空のラプソディ (Aozora no Rhapsody / Blue Sky Rhapsody / Miss Kobayshi's Dragon Maid Season 1 Opening) by fhána
