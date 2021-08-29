@@ -22,7 +22,7 @@ void setup() {
 }
 
 void loop() {
-  playSelectTune(MISS_KOBAYASHI_OP);
+  playSelectTune(AI_NO_SUPREME);
   delay(500);
 }
 
@@ -52,11 +52,16 @@ void playSelectTune(int tune)
 {
   int missKobayashiOpTuneLength;
   int superMarioSunshineGameOverTuneLength;
+  int aiNoSupremeLength;
   switch(tune)
   {
     case MISS_KOBAYASHI_OP:
       missKobayashiOpTuneLength = sizeof(missKobayashiOpTune) / sizeof(missKobayashiOpTune[0]);
       playTune(PIEZO_PIN, missKobayashiOpTune, missKobayashiOpDurations, missKobayashiOpTuneLength);
+      break;
+    case AI_NO_SUPREME:
+      aiNoSupremeLength = sizeof(AI_NO_SUPREME_TUNE) / sizeof(AI_NO_SUPREME_TUNE[0]);
+      playTune(PIEZO_PIN, AI_NO_SUPREME_TUNE, AI_NO_SUPREME_DURATIONS, aiNoSupremeLength);
       break;
     default:
       superMarioSunshineGameOverTuneLength = sizeof(SUPER_MARIO_SUNSHINE_GAME_OVER_TUNE) / sizeof(SUPER_MARIO_SUNSHINE_GAME_OVER_TUNE[0]);
