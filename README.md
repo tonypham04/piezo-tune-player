@@ -29,5 +29,6 @@ To run the project in Arduino IDE what you will need to do first is move the dir
 ![Screenshot of where to put the PiezoTunePlayerLibrary](images/Where-to-put-PiezoTunePlayerLibrary.png)  
 This is important because the PiezoTunePlayerLibrary contains all the content related to tunes used in the sketch.
 ## Playlist
-The playlist of tunes available as of Saturday, August 21, 2021 is shown below:
+The playlist of tunes available as of Tuesday, August 31, 2021 is shown below:
 - 青空のラプソディ (Aozora no Rhapsody / Blue Sky Rhapsody / Miss Kobayshi's Dragon Maid Season 1 Opening) by fhána
+- 愛のシュプリーム (Ai no Supreme / Love Supreme / Miss Kobayashi's Dragon Maid S Opening) by fhána

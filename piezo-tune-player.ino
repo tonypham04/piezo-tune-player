@@ -6,12 +6,13 @@
  *
  * @author Tony Pham
  */
- // TODO: Add tune selection feature to be able to play a selected tune by index (updates to: sketch, possibly PiezoTunePlayerLibrary)
  // TODO: Add a new tune (Sasageyo, Kaikai Kitan, no. 1)?
  // TODO: Add support for a 7-segment (updates to: Fritzing, README, circuit, sketch)
+ // TODO: In the serial monitor add "NOW PLAYING ________ " when playing a tune?
  // TODO: Fix some timing issues (in particular the chorus for Miss Kobayashi Op 1)
 
 #include "Playlist.h"
+#include "Error.h"
 
 /* Global Variables */
 const int PIEZO_PIN = 15;
@@ -21,8 +22,7 @@ void setup() {
 }
 
 void loop() {
-  int missKobayashiOpTuneLength = sizeof(missKobayashiOpTune) / sizeof(missKobayashiOpTune[0]);
-  playTune(PIEZO_PIN, missKobayashiOpTune, missKobayashiOpDurations, missKobayashiOpTuneLength);
+  playSelectTune(AI_NO_SUPREME);
   delay(500);
 }
 
@@ -41,6 +41,43 @@ void playTune(const int piezoPin, const int tuneNotes[], const float tuneDuratio
     delay(1000 * tuneDurations[i]);
     noTone(piezoPin);
   }
+}
+
+/**
+ * This function plays one specific tune from the selection of available tunes.
+ * If the specified tune is not available, a cover of "Game Over" theme from Super Mario Sunshine is played on the piezo buzzer.
+ * @param tune - Integer representation of a tune
+ */
+void playSelectTune(int tune)
+{
+  int missKobayashiOpTuneLength;
+  int superMarioSunshineGameOverTuneLength;
+  int aiNoSupremeLength;
+  switch(tune)
+  {
+    case MISS_KOBAYASHI_OP:
+      missKobayashiOpTuneLength = sizeof(missKobayashiOpTune) / sizeof(missKobayashiOpTune[0]);
+      playTune(PIEZO_PIN, missKobayashiOpTune, missKobayashiOpDurations, missKobayashiOpTuneLength);
+      break;
+    case AI_NO_SUPREME:
+      aiNoSupremeLength = sizeof(AI_NO_SUPREME_TUNE) / sizeof(AI_NO_SUPREME_TUNE[0]);
+      playTune(PIEZO_PIN, AI_NO_SUPREME_TUNE, AI_NO_SUPREME_DURATIONS, aiNoSupremeLength);
+      break;
+    default:
+      superMarioSunshineGameOverTuneLength = sizeof(SUPER_MARIO_SUNSHINE_GAME_OVER_TUNE) / sizeof(SUPER_MARIO_SUNSHINE_GAME_OVER_TUNE[0]);
+      playTune(PIEZO_PIN, SUPER_MARIO_SUNSHINE_GAME_OVER_TUNE, SUPER_MARIO_SUNSHINE_GAME_OVER_DURATIONS, superMarioSunshineGameOverTuneLength);
+      break;
+  }
+}
+
+/* DEBUG/TEST FUNCTIONS */
+
+/**
+ * This test function confirms that the playSelectTune function will play an error tune when the specified tune is not available.
+ */
+void testPlaySelectTuneDefault()
+{
+  playSelectTune(SUPER_MARIO_SUNSHINE_GAME_OVER);
 }
 
 /**
