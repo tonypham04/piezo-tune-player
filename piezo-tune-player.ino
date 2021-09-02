@@ -13,6 +13,7 @@
 
 #include "Playlist.h"
 #include "Error.h"
+#include <Bounce2.h>
 
 /* Constants for 7-Segment Display */
 const byte DIGITAL_ZERO = {B00000011};
@@ -28,17 +29,28 @@ const byte DIGITAL_NINE = {B00001001};
 
 /* Global Variables */
 const int PIEZO_PIN = 15;
+const int PLAY_BTN = 16;
 const int SER = 17;
 const int LATCH = 18;
 const int SRCLK = 19;
+// Instantiate a Bounce object
+Bounce b = Bounce();
+int tuneNumber = 0;
+const int TUNE_NUMBER_MAX = 2;
 
 void setup()
 {
+  Serial.begin(9600);
+  // Setup the piezo buzzer pin
   pinMode(PIEZO_PIN, OUTPUT);
+  // Setup the shift register pins
   pinMode(SER, OUTPUT);
   pinMode(LATCH, OUTPUT);
   pinMode(SRCLK, OUTPUT);
-
+  // Setup debounce for the PBS
+  b.attach(PLAY_BTN, INPUT);
+  b.interval(25);
+  // Initial settings for the shift register
   digitalWrite(SER, LOW);
   digitalWrite(LATCH, LOW);
   digitalWrite(SRCLK, LOW);
@@ -46,7 +58,8 @@ void setup()
 
 void loop()
 {
-  testDigitalNumbers();
+  updateSevenSegmentDisplay(0);
+  testPullDownPBS();
 }
 
 /**
@@ -94,7 +107,7 @@ void playSelectTune(int tune)
 }
 
 /**
- * Updates the 7-segment display with the specified number.
+ * this function updates the 7-segment display with the specified number.
  */
 void updateSevenSegmentDisplay(int numToDisplay)
 {
@@ -159,9 +172,22 @@ void testDigitalNumbers()
 }
 
 /**
+ * This function tests whether a debounced push button switch (PBS) setup in pull-down configuration was clicked.
+ */
+void testPullDownPBS()
+{
+  b.update();
+  if (b.rose())
+  {
+    Serial.println("PBS clicked!");
+  }
+}
+
+/**
  * References
  * 1. 'Aozora no Rhapsody' played with Synthesia uploaded by 'MyReminiscence': https://www.youtube.com/watch?v=sG9tKEV510s
  * 2. 'Project 12 - Piezo Sounder Melody Player' from the 'Beginning Arduino' textbook written by Michael Roberts
  * 3. Physics of Music - Notes: https://pages.mtu.edu/~suits/notefreqs.html
  * 4. Music video to the original song: https://www.youtube.com/watch?v=maKok2RItxM
+ * 5. GitHub page for Bounce2 library: https://github.com/thomasfredericks/Bounce2
  */
