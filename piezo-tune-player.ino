@@ -26,6 +26,7 @@ const byte DIGITAL_SIX = {B01000001};
 const byte DIGITAL_SEVEN = {B00011111};
 const byte DIGITAL_EIGHT = {B00000001};
 const byte DIGITAL_NINE = {B00001001};
+const byte DIGITAL_E = {B01100001};
 
 /* Global Variables */
 const int PIEZO_PIN = 15;
@@ -33,10 +34,14 @@ const int PLAY_BTN = 16;
 const int SER = 17;
 const int LATCH = 18;
 const int SRCLK = 19;
+// Since there is only one 7-segment display and track numbers start at 1 and end at 9, 10 is a good number to represent the end of the playlist
+const int END_OF_PLAYLIST = 10;
+// Currently there are only 2 tunes
+const int TUNE_NUMBER_MAX = 2;
+
 // Instantiate a Bounce object
 Bounce b = Bounce();
 int tuneNumber = 0;
-const int TUNE_NUMBER_MAX = 2;
 
 void setup()
 {
@@ -58,8 +63,7 @@ void setup()
 
 void loop()
 {
-  updateSevenSegmentDisplay(0);
-  testPullDownPBS();
+  checkForNextTuneRequest();
 }
 
 /**
@@ -114,6 +118,9 @@ void updateSevenSegmentDisplay(int numToDisplay)
   digitalWrite(LATCH, LOW);
   switch(numToDisplay)
   {
+    case 0:
+      shiftOut(SER, SRCLK, LSBFIRST, DIGITAL_ZERO);
+      break;
     case 1:
       shiftOut(SER, SRCLK, LSBFIRST, DIGITAL_ONE);
       break;
@@ -142,10 +149,35 @@ void updateSevenSegmentDisplay(int numToDisplay)
       shiftOut(SER, SRCLK, LSBFIRST, DIGITAL_NINE);
       break;
     default:
-      shiftOut(SER, SRCLK, LSBFIRST, DIGITAL_ZERO);
+      shiftOut(SER, SRCLK, LSBFIRST, DIGITAL_E);
       break;
   }
   digitalWrite(LATCH, HIGH);
+}
+
+/**
+ * This function checks if the next tune is being requested by the user.
+ * A next tune request occurs when the user pushes the PBS.
+ */
+void checkForNextTuneRequest()
+{
+  // Show the current tune number
+  updateSevenSegmentDisplay(tuneNumber);
+  // Check if the PBS was pushed
+  b.update();
+  if (b.rose())
+  {
+    tuneNumber = tuneNumber + 1;
+    // Play the error tune and then reset the tune number to the first song (1) if requesting another tune after the end of the playlist
+    if (tuneNumber > TUNE_NUMBER_MAX)
+    {
+      updateSevenSegmentDisplay(END_OF_PLAYLIST);
+      playSelectTune(tuneNumber);
+      tuneNumber = 1;
+    }
+    updateSevenSegmentDisplay(tuneNumber);
+    playSelectTune(tuneNumber);
+  }
 }
 
 /* DEBUG/TEST FUNCTIONS */
