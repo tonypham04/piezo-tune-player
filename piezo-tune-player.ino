@@ -6,8 +6,7 @@
  *
  * @author Tony Pham
  */
- // TODO: Add a new tune (Sasageyo, Kaikai Kitan, no. 1)?
- // TODO: Add support for a 7-segment (updates to: Fritzing, README, circuit, sketch)
+
  // TODO: In the serial monitor add "NOW PLAYING ________ " when playing a tune?
  // TODO: Fix some timing issues (in particular the chorus for Miss Kobayashi Op 1)
 
