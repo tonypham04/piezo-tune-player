@@ -8,10 +8,14 @@ This project creates a tune player by writing a sketch using Arduino programming
 ### Materials
 The project uses the following components:
 - Teensy 3.2 microcontroller
-- Piezo Buzzer
-- 10k Ω resistor
+- Piezo buzzer
+- 10k Ω resistor (x1)
 - Wires (various lengths)
 - Breadboard (with conductive aluminum plating on the bottom)
+- Push button switch (PBS)
+- Shift register (SN74HC595N)
+- 7-segment display (with common anode)
+- 220 Ω resistor (x9)
 ### Software
 The project uses the following software:
 - [Arduino IDE](https://www.arduino.cc/en/Main/OldSoftwareReleases#previous) (Version 1.8.13)
